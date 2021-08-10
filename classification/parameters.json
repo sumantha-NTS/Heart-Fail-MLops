@@ -1,0 +1,18 @@
+{
+    "training":
+    {
+        "n_estimators": 500
+    },
+    "evaluation":
+    {
+
+    },
+    "registration":
+    {
+        "tags": ["accuracy"]
+    },
+    "scoring":
+    {
+        
+    }
+}
