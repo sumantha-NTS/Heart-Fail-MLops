@@ -83,7 +83,7 @@ def main():
     with open('../parameters.json') as f:
         pars = json.load(f)
     try:
-        training_args = pars['training']
+        train_args = pars['training']
     except KeyError:
         print('could not load training parameters from file')
         train_args = {}

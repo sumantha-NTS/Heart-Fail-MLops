@@ -1,5 +1,4 @@
 ## importing necessary libraries
-import os,json
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -34,8 +33,6 @@ def main():
     print('Running train.py file')
 
     # Load the dataset
-    data_dir = 'data'
-    data_file = os.path.join('../',data_dir,'heart_failure.csv')
     df = pd.read_csv('../data/heart_failure.csv')
 
     # Scale the input data
