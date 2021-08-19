@@ -1,4 +1,4 @@
-import numpy,joblib,os
+import numpy, joblib, os
 from azureml.core.model import Model
 
 def init():

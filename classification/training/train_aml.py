@@ -5,38 +5,37 @@ import os
 import argparse
 import joblib
 import json
-from train import train_model,split_data,scaling_func, get_metrics
+from train import train_model, split_data, scaling_func, get_metrics
 
 def register_dataset(aml_workspace:workspace,
-                    dataset_name: str,
-                    datastore_name: str,
-                    file_path: str,
-                    ) -> Dataset:
-                    datastore = Datastore.get(aml_workspace,datastore_name)
-                    dataset = Dataset.Tabular.from_delimited_files(path = (datastore, file_path))
-                    dataset = Dataset.register(workspace = aml_workspace,name=dataset_name,create_new_version = True)
-                    return dataset
+    dataset_name: str,
+    datastore_name: str,
+    file_path: str,
+) -> Dataset:
+    datastore = Datastore.get(aml_workspace, datastore_name)
+    dataset = Dataset.Tabular.from_delimited_files(path = (datastore, file_path))
+    dataset = Dataset.register(workspace = aml_workspace, name=dataset_name, create_new_version = True)
+    return dataset
 
 
 def main():
     print('Running train_aml.py')
 
     parser = argparse.ArgumentParser('train')
-    parser.add_argument("--model_name",type=str,help='Name of the model',default='classification_model.pkl')
+    parser.add_argument("--model_name", type=str, help='Name of the model', default='classification_model.pkl')
 
-    parser.add_argument("--step_output",type=str,help=("output for passing data to next step"))
+    parser.add_argument("--step_output", type=str, help=("output for passing data to next step"))
 
-    parser.add_argument("--dataset_version",type=str,help=("dataset version"))
+    parser.add_argument("--dataset_version", type=str, help=("dataset version"))
 
-    parser.add_argument("--data_file_path",type=str,help=("data file path, if specified,\
+    parser.add_argument("--data_file_path", type=str, help=("data file path, if specified,\
                a new version of the dataset will be registered"))
 
-    parser.add_argument("--caller_run_id",type=str,help=("caller run id, for example ADF pipeline run id"))
+    parser.add_argument("--caller_run_id", type=str, help=("caller run id, for example ADF pipeline run id"))
 
-    parser.add_argument("--dataset_name",type=str,help=("Dataset name. Dataset must be passed by name\
+    parser.add_argument("--dataset_name", type=str, help=("Dataset name. Dataset must be passed by name\
               to always get the desired dataset version\
-              rather than the one used while the pipeline creation")
-    )
+              rather than the one used while the pipeline creation"))
 
     args = parser.parse_args()
 
@@ -59,9 +58,9 @@ def main():
     if dataset_name:
 
         if data_file_path == None:
-            dataset = Dataset.get_by_name(run.experiment.workspace, dataset_name,dataset_version)
+            dataset = Dataset.get_by_name(run.experiment.workspace, dataset_name, dataset_version)
         else:
-            dataset = register_dataset(run.experiment.workspace,dataset_name,os.environ.get("DATASTORE_NAME"),data_file_path)
+            dataset = register_dataset(run.experiment.workspace, dataset_name, os.environ.get("DATASTORE_NAME"), data_file_path)
 
     else:
         e = "No dataset provided"
@@ -89,10 +88,10 @@ def main():
         train_args = {}
 
     # train the model
-    model = train_model(data,train_args)
+    model = train_model(data, train_args)
 
     # get the metrics and log the details
-    metrics = get_metrics(model,data)
+    metrics = get_metrics(model, data)
     for (k,v) in metrics:
         run.log(k,v)
         run.parent.log(k,v)
