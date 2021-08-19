@@ -26,10 +26,13 @@ def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_
             model_path=model_path,
             tags=model_tags,
             datasets=[('training data', Dataset.get_by_id(exp.workspace, dataset_id))])
-        
+
         os.chdir("..")
-        print("Model registered: {} \nModel Description: {} \nModel Version: {}".format(model.name, model.description, model.version))
-    
+        print(
+            "Model registered: {} \nModel Description: {} "
+            "\nModel Version: {}".format(
+                model.name, model.description, model.version))
+
     except Exception:
         traceback.print_exc(limit=None, file=None, chain=True)
         print("Model registration failed")
@@ -70,7 +73,6 @@ def main():
     # load the parameters from parameters.json
     with open('../parameters.json') as f:
         pars = json.load(f)
-    
     try:
         register_args = pars['registration']
     except KeyError:
@@ -83,7 +85,7 @@ def main():
         try:
             mtag = run.parent.get_metrics()[tag]
             model_tags[tag] = mtag
-        
+
         except KeyError:
             print(f"Could not find {tag} metric on parent run")
 
@@ -92,7 +94,7 @@ def main():
     model_file = os.path.join(model_path, model_name)
     model = joblib.load(model_file)
     parent_tags = run.parent.get_tags()
-    
+
     # extracting the build id from run
     build_id = parent_tags["BuildId"]
 

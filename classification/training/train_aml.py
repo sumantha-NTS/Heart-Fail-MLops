@@ -16,7 +16,10 @@ def register_dataset(
 ) -> Dataset:
     datastore = Datastore.get(aml_workspace, datastore_name)
     dataset = Dataset.Tabular.from_delimited_files(path=(datastore, file_path))
-    dataset = Dataset.register(workspace=aml_workspace, name=dataset_name, create_new_version=True)
+    dataset = Dataset.Tabular.from_delimited_files(path=(datastore, file_path))
+    dataset = dataset.register(workspace=aml_workspace,
+                               name=dataset_name,
+                               create_new_version=True)
     return dataset
 
 
@@ -25,38 +28,38 @@ def main():
 
     parser = argparse.ArgumentParser('train')
     parser.add_argument(
-        "--model_name", 
-        type=str, help='Name of the model', 
+        "--model_name",
+        type=str, help='Name of the model',
         default='classification_model.pkl'
     )
 
     parser.add_argument(
-        "--step_output", 
-        type=str, 
+        "--step_output",
+        type=str,
         help=("output for passing data to next step")
     )
 
     parser.add_argument(
-        "--dataset_version", 
-        type=str, 
+        "--dataset_version",
+        type=str,
         help=("dataset version"))
 
     parser.add_argument(
-        "--data_file_path", 
-        type=str, 
+        "--data_file_path",
+        type=str,
         help=("data file path, if specified,\
                a new version of the dataset will be registered")
     )
 
     parser.add_argument(
-        "--caller_run_id", 
-        type=str, 
+        "--caller_run_id",
+        type=str,
         help=("caller run id, for example ADF pipeline run id")
     )
 
     parser.add_argument(
-        "--dataset_name", 
-        type=str, 
+        "--dataset_name",
+        type=str,
         help=("Dataset name. Dataset must be passed by name\
               to always get the desired dataset version\
               rather than the one used while the pipeline creation"))
@@ -84,7 +87,10 @@ def main():
         if data_file_path == None:
             dataset = Dataset.get_by_name(run.experiment.workspace, dataset_name, dataset_version)
         else:
-            dataset = register_dataset(run.experiment.workspace, dataset_name, os.environ.get("DATASTORE_NAME"), data_file_path)
+            dataset = register_dataset(run.experiment.workspace,
+                                        dataset_name,
+                                        os.environ.get("DATASTORE_NAME"),
+                                        data_file_path)
 
     else:
         e = "No dataset provided"
@@ -135,6 +141,6 @@ def main():
 
     run.complete()
     
-    
+
 if __name__ == "__main__":
     main()

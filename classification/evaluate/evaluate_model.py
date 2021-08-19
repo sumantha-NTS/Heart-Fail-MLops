@@ -11,11 +11,25 @@ run_id = 'amlcompute'
 
 parser = argparse.ArgumentParser("evaluate")
 
-parser.add_argument("--run_id", type=str, help="Training run ID")
+parser.add_argument(
+    "--run_id",
+    type=str,
+    help="Training run ID"
+)
 
-parser.add_argument("--model_name", type=str, help="Name of the Model", default="diabetes_model.pkl")
+parser.add_argument(
+    "--model_name",
+    type=str,
+    help="Name of the Model",
+    default="diabetes_model.pkl"
+)
 
-parser.add_argument("--allow_run_cancel", type=str, help="Set this to false to avoid evaluation step from cancelling run after an unsuccessful evaluation", default="true")
+parser.add_argument(
+    "--allow_run_cancel",
+    type=str,
+    help="Set this to false to avoid evaluation step from cancelling run after an unsuccessful evaluation",
+    default="true"
+)
 
 args = parser.parse_args()
 
@@ -40,10 +54,10 @@ try:
             print('Unable to find', metric_eval, 'metrics')
             if((allow_run_cancel).lower() == 'true'):
                 run.parent.cancel()
-            
+
         else:
             print('Current Production model acc:{}, New trained model acc:{}'.format(production_model_acc, new_model_acc))
-    
+
     else:
         print('This is the first model, it should be registered')
 
