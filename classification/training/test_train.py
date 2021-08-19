@@ -1,5 +1,5 @@
 import numpy as np
-from classification.training.train import train_model
+from train import train_model
 
 
 def test_train_model():
@@ -7,7 +7,7 @@ def test_train_model():
     y_train = np.array([10, 9, 8, 8, 6, 5])
     data = {"train": {"x": X_train, "y": y_train}}
 
-    reg_model = train_model(data, {"n_estimators": 100})
+    model = train_model(data, {"n_estimators": 100})
 
-    preds = reg_model.predict([[1], [2]])
-    np.testing.assert_almost_equal(preds, [9.93939393939394, 9.03030303030303])
+    preds = model.predict([[1], [2]])
+    np.testing.assert_almost_equal(preds, [9.9, 9.01])
