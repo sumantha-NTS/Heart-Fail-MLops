@@ -16,7 +16,8 @@ def register_aml_model(
     exp, run_id,
     dataset_id,
     build_id: str = 'none',
-    build_uri=None):
+    build_uri=None
+):
     try:
         tagsValue = {
             'area': 'classification',

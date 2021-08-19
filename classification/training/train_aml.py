@@ -83,7 +83,7 @@ def main():
 
     # Get the dataset
     if (dataset_name):
-        if (data_file_path == None):
+        if (data_file_path == 'none'):
             dataset = Dataset.get_by_name(
                 run.experiment.workspace,
                 dataset_name,
