@@ -10,4 +10,4 @@ def test_train_model():
     model = train_model(data, {"n_estimators": 100})
 
     preds = model.predict([[1], [2]])
-    np.testing.assert_almost_equal(preds, [9.9, 9.01])
+    np.testing.assert_almost_equal(preds, [10, 9])
