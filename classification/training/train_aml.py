@@ -82,10 +82,12 @@ def main():
     run = Run.get_context()
 
     # Get the dataset
-    if dataset_name:
-
+    if (dataset_name):
         if (data_file_path == None):
-            dataset = Dataset.get_by_name(run.experiment.workspace, dataset_name, dataset_version)
+            dataset = Dataset.get_by_name(
+                run.experiment.workspace,
+                dataset_name,
+                dataset_version)
         else:
             dataset = register_dataset(
                 run.experiment.workspace,

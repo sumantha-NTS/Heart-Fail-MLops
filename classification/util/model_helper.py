@@ -28,7 +28,9 @@ def get_model(
 
         # Both a name and value must be specified to use tags.
         if tag_name is None or tag_value is None:
-            raise ValueError("model_tag_name and model_tag_value should both be supplied or excluded")
+            raise ValueError(
+                "model_tag_name and model_tag_value should both be supplied"
+                + "or excluded")
 
         tags = [[tag_name, tag_value]]
 
@@ -43,7 +45,11 @@ def get_model(
             tags=tags)
 
     else:
-        models = AMLModel.list(aml_workspace, name=model_name, tags=tags, latest=True)
+        models = AMLModel.list(
+            aml_workspace,
+            name=model_name,
+            tags=tags,
+            latest=True)
 
         if len(models) == 1:
             model = models[0]

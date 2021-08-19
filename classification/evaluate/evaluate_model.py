@@ -27,7 +27,7 @@ parser.add_argument(
 parser.add_argument(
     "--allow_run_cancel",
     type=str,
-    help="Set this to false to avoid evaluation step from cancelling run after an unsuccessful evaluation",
+    help="Set this to false to avoid evaluation step from cancelling",
     default="true"
 )
 
@@ -60,7 +60,10 @@ try:
                 run.parent.cancel()
 
         else:
-            print('Current Production model acc:{}, New trained model acc:{}'.format(production_model_acc, new_model_acc))
+            print(
+                'Current Production model acc:{}, '
+                'New trained model acc:{}'.format(
+                    production_model_acc, new_model_acc))
 
     else:
         print('This is the first model, it should be registered')

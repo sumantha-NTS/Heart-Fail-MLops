@@ -19,7 +19,9 @@ def split_data(df):
     x_train, x_test, y_train, y_test = train_test_split(
         df.drop('y', axis=1), df.y, test_size=0.2, random_state=2)
 
-    data = {'train': {'x': x_train, 'y': y_train}, 'test': {'x': x_test, 'y': y_test}}
+    data = {
+        'train': {'x': x_train, 'y': y_train},
+        'test': {'x': x_test, 'y': y_test}}
     return data
 
 

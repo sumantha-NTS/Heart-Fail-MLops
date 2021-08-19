@@ -49,7 +49,9 @@ def main():
         datastore_name = aml_workspace.get_default_datastore().name
 
     # updating the datastore to run config
-    run_config.environment.environment_variables["DATASTORE_NAME"] = datastore_name
+    run_config.environment.environment_variables[
+        "DATASTORE_NAME"
+        ] = datastore_name
 
     # creating pipeline parameters
     model_name_param = PipelineParameter(

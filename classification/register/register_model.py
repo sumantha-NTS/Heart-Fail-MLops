@@ -9,9 +9,19 @@ import traceback
 
 
 # defining function to register model in AML
-def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_id, build_id: str = 'none', build_uri=None):
+def register_aml_model(
+    model_path,
+    model_name,
+    model_tags,
+    exp, run_id,
+    dataset_id,
+    build_id: str = 'none',
+    build_uri=None):
     try:
-        tagsValue = {'area': 'classification', 'run_id': run_id, 'experiment_name': exp.name}
+        tagsValue = {
+            'area': 'classification',
+            'run_id': run_id,
+            'experiment_name': exp.name}
         tagsValue.update(model_tags)
 
         if build_id != 'none':
@@ -26,7 +36,9 @@ def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_
             model_name=model_name,
             model_path=model_path,
             tags=model_tags,
-            datasets=[('training data', Dataset.get_by_id(exp.workspace, dataset_id))])
+            datasets=[(
+                'training data',
+                Dataset.get_by_id(exp.workspace, dataset_id))])
 
         os.chdir("..")
         print(
@@ -115,7 +127,15 @@ def main():
     # register the model
     if model is not None:
         dataset_id = parent_tags["dataset_id"]
-        register_aml_model(model_file, model_name, model_tags, exp, run_id, dataset_id, build_id, build_uri)
+        register_aml_model(
+            model_file,
+            model_name,
+            model_tags,
+            exp,
+            run_id,
+            dataset_id,
+            build_id,
+            build_uri)
 
     else:
         print('Model not found. Skipping the model registration')
