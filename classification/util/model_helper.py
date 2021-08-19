@@ -34,7 +34,7 @@ def get_model(
 
     # Fetch the model wrt the  model version
     if model_version is not None:
-        model = AMLModel(aml_workspace,name=model_name,version=model_version,tags=tags)
+        model = AMLModel(aml_workspace, name=model_name, version=model_version, tags=tags)
 
     else:
         models = AMLModel.list(aml_workspace, name=model_name, tags=tags, latest=True)

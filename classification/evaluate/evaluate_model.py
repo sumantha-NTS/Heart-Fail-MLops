@@ -49,5 +49,5 @@ try:
 
 except Exception:
     traceback.print_exc(limit=None, file=None, chain=True)
-    print('Something went wrong trying to evaluate')
+    print('Something went wrong trying to evaluate.')
     raise

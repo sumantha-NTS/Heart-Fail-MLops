@@ -23,12 +23,12 @@ def main():
         subscription_id=e.subscription_id,
         resource_group=e.resource_group
     )
-    print("get_workspace:",aml_workspace)
+    print("get_workspace:", aml_workspace)
 
     # Get Azure machine learning cluster
     aml_compute = get_compute(aml_workspace, e.compute_name, e.vm_size)
     if aml_compute is not None:
-        print("aml_compute:",aml_compute)
+        print("aml_compute:", aml_compute)
 
     # Create a reusable Azure ML environment
     environment = get_environment(

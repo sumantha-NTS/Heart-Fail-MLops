@@ -1,4 +1,5 @@
-import numpy, joblib, os
+import joblib
+import os
 from azureml.core.model import Model
 
 def init():
@@ -7,8 +8,5 @@ def init():
 
     model = joblib.load(model_path)
 
-
-
 if __name__ == "__main__":
     init()
-    
