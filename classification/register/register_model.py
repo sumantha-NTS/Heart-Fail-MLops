@@ -7,6 +7,7 @@ import joblib
 import sys
 import traceback
 
+
 # defining function to register model in AML
 def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_id, build_id: str = 'none', build_uri=None):
     try:
@@ -56,11 +57,21 @@ def main():
     exp = run.experiment
     parser = argparse.ArgumentParser("register")
 
-    parser.add_argument("--run_id", type=str, help="Training run ID")
+    parser.add_argument(
+        "--run_id",
+        type=str,
+        help="Training run ID")
 
-    parser.add_argument("--model_name", type=str, help="Name of the Model", default="diabetes_model.pkl")
+    parser.add_argument(
+        "--model_name",
+        type=str,
+        help="Name of the Model",
+        default="diabetes_model.pkl")
 
-    parser.add_argument("--step_input", type=str, help=("input from previous steps"))
+    parser.add_argument(
+        "--step_input",
+        type=str,
+        help=("input from previous steps"))
 
     args = parser.parse_args()
 

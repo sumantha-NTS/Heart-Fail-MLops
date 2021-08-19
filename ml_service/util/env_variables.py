@@ -11,7 +11,6 @@ from typing import Optional
 class Env:
     """Loads all environment variables into a predefined set of properties
     """
-
     # to load .env file into environment variables for local execution
     # load_dotenv()
     workspace_name: Optional[str] = os.environ.get("WORKSPACE_NAME")

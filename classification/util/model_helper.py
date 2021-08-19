@@ -2,11 +2,13 @@ from azureml.core import Run
 from azureml.core import Workspace
 from azureml.core.model import Model as AMLModel
 
+
 # defining function which Retrieves and returns the current workspace.
 def get_current_workspace() -> Workspace:
     run = Run.get_context(allow_offline=False)
     experiment = run.experiment
     return experiment.workspace
+
 
 # defining function to fetch the model
 def get_model(

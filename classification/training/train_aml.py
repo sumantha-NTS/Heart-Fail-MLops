@@ -84,13 +84,14 @@ def main():
     # Get the dataset
     if dataset_name:
 
-        if data_file_path == None:
+        if (data_file_path == None):
             dataset = Dataset.get_by_name(run.experiment.workspace, dataset_name, dataset_version)
         else:
-            dataset = register_dataset(run.experiment.workspace,
-                                        dataset_name,
-                                        os.environ.get("DATASTORE_NAME"),
-                                        data_file_path)
+            dataset = register_dataset(
+                run.experiment.workspace,
+                dataset_name,
+                os.environ.get("DATASTORE_NAME"),
+                data_file_path)
 
     else:
         e = "No dataset provided"
@@ -104,7 +105,7 @@ def main():
     # scale the data
     df = dataset.to_pandas_dataframe()
     data = scaling_func(df)
-    
+
     # split the data
     data = split_data(data)
 
@@ -140,7 +141,7 @@ def main():
     print(f"tags now present for run: {run.tags}")
 
     run.complete()
-    
+
 
 if __name__ == "__main__":
     main()

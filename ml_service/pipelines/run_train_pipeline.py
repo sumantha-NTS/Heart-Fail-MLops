@@ -5,7 +5,6 @@ from ml_service.util.env_variables import Env
 
 
 def main():
-
     parser = argparse.ArgumentParser("register")
     parser.add_argument(
         "--output_pipeline_id_file",
