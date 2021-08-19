@@ -10,6 +10,7 @@ from ml_service.util.attach_compute import get_compute
 from ml_service.util.manage_environment import get_environment
 from ml_service.util.load_data import upload_from_local
 
+
 def main():
     # configuring the runs for experiment
     run_config = RunConfiguration()

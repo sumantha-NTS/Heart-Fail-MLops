@@ -7,6 +7,7 @@ import joblib
 import json
 from train import train_model, split_data, scaling_func, get_metrics
 
+
 def register_dataset(
     aml_workspace: workspace,
     dataset_name: str,
@@ -14,8 +15,8 @@ def register_dataset(
     file_path: str,
 ) -> Dataset:
     datastore = Datastore.get(aml_workspace, datastore_name)
-    dataset = Dataset.Tabular.from_delimited_files(path = (datastore, file_path))
-    dataset = Dataset.register(workspace = aml_workspace, name=dataset_name, create_new_version = True)
+    dataset = Dataset.Tabular.from_delimited_files(path=(datastore, file_path))
+    dataset = Dataset.register(workspace=aml_workspace, name=dataset_name, create_new_version=True)
     return dataset
 
 
@@ -133,6 +134,7 @@ def main():
     print(f"tags now present for run: {run.tags}")
 
     run.complete()
+    
     
 if __name__ == "__main__":
     main()

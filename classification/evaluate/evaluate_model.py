@@ -28,7 +28,7 @@ metric_eval = 'accuracy'
 try:
     first_registration = False
     tag_name = 'experiment_name'
-    model = get_model(model_name = model_name, tag_name=tag_name, tag_value=exp.name, aml_workspace=ws)
+    model = get_model(model_name=model_name, tag_name=tag_name, tag_value=exp.name, aml_workspace=ws)
 
     if model is not None:
         if metric_eval in model.tags:

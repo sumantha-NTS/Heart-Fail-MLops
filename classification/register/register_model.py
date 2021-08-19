@@ -10,7 +10,7 @@ import traceback
 # defining function to register model in AML
 def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_id, build_id: str = 'none', build_uri=None):
     try:
-        tagsValue = {'area': 'classification', 'run_id': run_id, 'experiment_name': exp.name }
+        tagsValue = {'area': 'classification', 'run_id': run_id, 'experiment_name': exp.name}
         tagsValue.update(model_tags)
 
         if build_id != 'none':
@@ -21,7 +21,7 @@ def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_
                 tagsValue['BuildUri'] = build_uri
 
         model = AMLModel.register(
-            workspace = exp.workspace,
+            workspace=exp.workspace,
             model_name=model_name,
             model_path=model_path,
             tags=model_tags,
@@ -35,9 +35,10 @@ def register_aml_model(model_path, model_name, model_tags, exp, run_id, dataset_
         print("Model registration failed")
         raise
 
+
 # defining function if the model is already registered
 def model_already_registered(model_name, exp, run_id):
-    model_list = AMLModel.list(exp.workspace, name=model_name, run_id = run_id)
+    model_list = AMLModel.list(exp.workspace, name=model_name, run_id=run_id)
     if len(model_list) >= 1:
         e = ("Model name:", model_name, "in workspace",
              exp.workspace, "with run_id ", run_id, "is already registered.")
@@ -106,6 +107,7 @@ def main():
     else:
         print('Model not found. Skipping the model registration')
         sys.exit(0)
+
 
 if __name__ == '__main__':
     main()
