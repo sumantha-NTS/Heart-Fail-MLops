@@ -120,6 +120,12 @@ def main():
         print('could not load training parameters from file')
         train_args = {}
 
+    # Log the training parameters
+    print(f"Parameters: {train_args}")
+    for (k, v) in train_args.items():
+        run.log(k, v)
+        run.parent.log(k, v)
+
     # train the model
     model = train_model(data, train_args)
 

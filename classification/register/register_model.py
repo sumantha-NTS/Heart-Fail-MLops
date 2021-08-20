@@ -79,7 +79,7 @@ def main():
         "--model_name",
         type=str,
         help="Name of the Model",
-        default="diabetes_model.pkl")
+        default="classification_model.pkl")
 
     parser.add_argument(
         "--step_input",
@@ -126,17 +126,35 @@ def main():
     build_uri = parent_tags["BuildUri"]
 
     # register the model
-    if model is not None:
+    if (model is not None):
         dataset_id = parent_tags["dataset_id"]
-        register_aml_model(
-            model_file,
-            model_name,
-            model_tags,
-            exp,
-            run_id,
-            dataset_id,
-            build_id,
-            build_uri)
+        if (build_id is None):
+            register_aml_model(
+                model_file,
+                model_name,
+                model_tags,
+                exp,
+                run_id,
+                dataset_id)
+        elif (build_uri is None):
+            register_aml_model(
+                model_file,
+                model_name,
+                model_tags,
+                exp,
+                run_id,
+                dataset_id,
+                build_id)
+        else:
+            register_aml_model(
+                model_file,
+                model_name,
+                model_tags,
+                exp,
+                run_id,
+                dataset_id,
+                build_id,
+                build_uri)
 
     else:
         print('Model not found. Skipping the model registration')
