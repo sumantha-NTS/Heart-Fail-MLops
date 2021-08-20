@@ -14,6 +14,7 @@ output_sample = np.array([
     5021.509689995557,
     3693.645386402646])
 
+
 @input_schema('data', NumpyParameterType(input_sample))
 @output_schema(NumpyParameterType(output_sample))
 def init():
@@ -22,5 +23,3 @@ def init():
         os.getenv("AZUREML_MODEL_DIR").split('/')[-2])
 
     model = joblib.load(model_path)
-
-
