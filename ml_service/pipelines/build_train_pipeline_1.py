@@ -79,13 +79,13 @@ def main():
     print('Datastore: ', datatstore)
     dataset = Dataset.Tabular.from_delimited_files(
             path=(datatstore, path_on_datastore))
-    if (dataset.name):
-        print(f'{dataset.name} dataset found')
-    else:
-        raise Exception(
-                'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
-                % file_name
-            )
+    # if (dataset.name):
+    #     print(f'{dataset.name} dataset found')
+    # else:
+    #     raise Exception(
+    #             'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
+    #             % file_name
+    #         )
 
     # Get dataset name
     dataset_name = e.dataset_name
