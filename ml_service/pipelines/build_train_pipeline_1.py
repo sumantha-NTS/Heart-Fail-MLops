@@ -47,7 +47,7 @@ def main():
         datastore_name = e.datastore_name
     else:
         datastore_name = aml_workspace.get_default_datastore().name
-    print('Datastore_Name: ',datastore_name)
+    print('Datastore_Name: ', datastore_name)
 
     # updating the datastore to run config
     run_config.environment.environment_variables[
@@ -76,7 +76,7 @@ def main():
     file_name = "heart_fail.csv"
     target_path = "training_data/"
     path_on_datastore = os.path.join(target_path, file_name)
-    print('Datastore: ',datatstore)
+    print('Datastore: ', datatstore)
     dataset = Dataset.Tabular.from_delimited_files(
             path=(datatstore, path_on_datastore))
     # if dataset:
