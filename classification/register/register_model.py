@@ -69,7 +69,7 @@ def model_already_registered(model_name, exp, run_id):
 def main():
     run = Run.get_context()
     exp = run.experiment
-    run_id = run.parent._run_id
+    run_id = run.parent.id
     parser = argparse.ArgumentParser("register")
 
     parser.add_argument(
