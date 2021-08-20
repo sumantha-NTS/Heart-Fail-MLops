@@ -8,7 +8,7 @@ import os
 from ml_service.util.env_variables import Env
 from ml_service.util.attach_compute import get_compute
 from ml_service.util.manage_environment import get_environment
-from ml_service.util.load_data import upload_from_local
+# from ml_service.util.load_data import upload_from_local
 
 
 def main():
@@ -70,16 +70,16 @@ def main():
         name="caller_run_id",
         default_value="none")
 
-    
     # finding the dataset in the datastore
     datatstore = Datastore.get(aml_workspace, datastore_name)
     file_name = "heart_fail.csv"
     target_path = "training_data/"
     path_on_datastore = os.path.join(target_path, file_name)
-    try:
-        dataset = Dataset.Tabular.from_delimited_files(
+    dataset = Dataset.Tabular.from_delimited_files(
             path=(datatstore, path_on_datastore))
-    except:
+    if dataset:
+        print('dataset found')
+    else:
         raise Exception(
                 'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
                 % file_name
