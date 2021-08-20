@@ -40,6 +40,20 @@ stages:
           python -m ml_service.pipelines.build_train_pipeline_1
       displayName: 'Publish Azure Machine Learning Pipeline'
 
+jobs:
+- job: waitForValidation
+  displayName: Wait for external validation  
+  pool: server    
+  timeoutInMinutes: 4320 # job times out in 3 days
+  steps:   
+   - task: ManualValidation@0
+     timeoutInMinutes: 1440 # task times out in 1 day
+     inputs:
+         notifyUsers: |
+            sumanthneechadi@gmail.com
+         instructions: 'Please validate the build configuration and resume'
+         onTimeout: 'resume'
+
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train and evaluate model'
   condition: succeeded()
