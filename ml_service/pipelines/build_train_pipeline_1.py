@@ -79,7 +79,7 @@ def main():
     print('Datastore: ', datatstore)
     dataset = Dataset.Tabular.from_delimited_files(
             path=(datatstore, path_on_datastore))
-    if dataset:
+    if (dataset.name is not None):
         print(f'{dataset.name} dataset found')
     else:
         raise Exception(
