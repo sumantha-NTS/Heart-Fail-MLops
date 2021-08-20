@@ -37,7 +37,7 @@ def register_aml_model(
             workspace=exp.workspace,
             model_name=model_name,
             model_path=model_path,
-            tags=model_tags,
+            tags=tagsValue,
             datasets=[(
                 'training data',
                 Dataset.get_by_id(exp.workspace, dataset_id))])
