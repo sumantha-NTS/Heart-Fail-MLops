@@ -21,7 +21,7 @@ parser.add_argument(
     "--model_name",
     type=str,
     help="Name of the Model",
-    default="diabetes_model.pkl"
+    default="classification_model.pkl"
 )
 
 parser.add_argument(

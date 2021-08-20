@@ -13,7 +13,8 @@ def register_aml_model(
     model_path,
     model_name,
     model_tags,
-    exp, run_id,
+    exp,
+    run_id,
     dataset_id,
     build_id: str = 'none',
     build_uri=None
@@ -68,6 +69,7 @@ def model_already_registered(model_name, exp, run_id):
 def main():
     run = Run.get_context()
     exp = run.experiment
+    run_id = run.parent._run_id
     parser = argparse.ArgumentParser("register")
 
     parser.add_argument(
