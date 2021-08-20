@@ -75,13 +75,6 @@ stages:
     variables:
       AMLPIPELINE_ID: $[ dependencies.Get_Pipeline_ID.outputs['getpipelineid.AMLPIPELINEID'] ]
     steps:   
-    - task: ManualValidation@0
-      timeoutInMinutes: 1440 # task times out in 1 day
-      inputs:
-          notifyUsers: |
-              sumanthneechadi@gmail.com
-          instructions: 'Please validate the build configuration and resume'
-          onTimeout: 'resume'
     - task: ms-air-aiagility.vss-services-azureml.azureml-restApi-task.MLPublishedPipelineRestAPITask@0
       displayName: 'Invoke ML pipeline'
       inputs:
