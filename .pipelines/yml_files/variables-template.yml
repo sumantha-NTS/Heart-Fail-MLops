@@ -24,7 +24,7 @@ variables:
   - name: DATASET_NAME
     value: heart_fail
   - name: CSV_FILE_NAME
-    value: heart_failure.csv
+    value: heart_failure1.csv
   # Uncomment DATASTORE_NAME if you have configured non default datastore to point to your data
   # - name: DATASTORE_NAME
   #   value: datablobstore
