@@ -90,7 +90,7 @@ def main():
 
     args = parser.parse_args()
 
-    run_id = args.run_id
+    # run_id = args.run_id
     model_name = args.model_name
     model_path = args.step_input
 
