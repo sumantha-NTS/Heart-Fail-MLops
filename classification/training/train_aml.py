@@ -112,7 +112,7 @@ def main():
     data = split_data(data)
 
     # loading the parameters to train the model
-    with open('../parameters.json') as f:
+    with open('parameters.json') as f:
         pars = json.load(f)
     try:
         train_args = pars['training']
