@@ -125,7 +125,7 @@ def main():
 
     # get the metrics and log the details
     metrics = get_metrics(model, data)
-    for (k, v) in metrics:
+    for (k, v) in metrics.items():
         run.log(k, v)
         run.parent.log(k, v)
 
