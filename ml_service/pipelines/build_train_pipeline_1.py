@@ -47,6 +47,7 @@ def main():
         datastore_name = e.datastore_name
     else:
         datastore_name = aml_workspace.get_default_datastore().name
+    print('Datastore_Name: ',datastore_name)
 
     # updating the datastore to run config
     run_config.environment.environment_variables[
@@ -75,15 +76,16 @@ def main():
     file_name = "heart_fail.csv"
     target_path = "training_data/"
     path_on_datastore = os.path.join(target_path, file_name)
+    print('Datastore: ',datatstore)
     dataset = Dataset.Tabular.from_delimited_files(
             path=(datatstore, path_on_datastore))
-    if dataset:
-        print('dataset found')
-    else:
-        raise Exception(
-                'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
-                % file_name
-            )
+    # if dataset:
+    #     print('dataset found')
+    # else:
+    #     raise Exception(
+    #             'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
+    #             % file_name
+    #         )
 
     # Get dataset name
     dataset_name = e.dataset_name
