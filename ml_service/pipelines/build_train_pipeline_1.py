@@ -73,7 +73,7 @@ def main():
 
     # finding the dataset in the datastore
     datatstore = Datastore.get(aml_workspace, datastore_name)
-    file_name = "heart_failure.csv"
+    file_name = e.csv_file_name
     target_path = "training_data/"
     path_on_datastore = os.path.join(target_path, file_name)
     print('Datastore: ', datatstore)
