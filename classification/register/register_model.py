@@ -95,7 +95,7 @@ def main():
     print('Getting the registration parameters')
 
     # load the parameters from parameters.json
-    with open('../parameters.json') as f:
+    with open('parameters.json') as f:
         pars = json.load(f)
     try:
         register_args = pars['registration']
