@@ -15,3 +15,6 @@ dependencies:
 
       # Training deps
       - scikit-learn
+
+      # Scoring deps
+      - inference-schema[numpy-support]
