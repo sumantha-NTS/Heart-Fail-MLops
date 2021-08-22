@@ -14,4 +14,3 @@ dependencies:
       # Scoring deps
       - scikit-learn
       - pandas
-      - flask
