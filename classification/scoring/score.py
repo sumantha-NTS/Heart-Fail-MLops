@@ -23,8 +23,8 @@ def init():
 
 
 input_sample = numpy.array([
-    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    [10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
+    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11, 12],
+    [12, 11, 10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
 output_sample = numpy.array([
     5021.509689995557,
     3693.645386402646])
@@ -34,7 +34,7 @@ output_sample = numpy.array([
 # It then creates an OpenAPI (Swagger) specification for the web service
 # at http://<scoring_base_url>/swagger.json
 @input_schema('data', NumpyParameterType(input_sample))
-@output_schema(NumpyParameterType(prediction))
+@output_schema(NumpyParameterType(model.predict(input_sample)))
 def run(data, request_headers):
     result = model.predict(data)
 
