@@ -18,3 +18,5 @@ dependencies:
 
       # Scoring deps
       - inference-schema[numpy-support]
+
+      - flask
