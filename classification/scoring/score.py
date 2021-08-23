@@ -36,7 +36,7 @@ output_sample = numpy.array([
 @input_schema('data', NumpyParameterType(input_sample))
 @output_schema(NumpyParameterType(output_sample))
 def run(data, request_headers):
-    result = 'printing results'
+    result = model.predict(data)
     print(('{{"RequestId":"{0}", '
            '"TraceParent":"{1}", '
            '"NumberOfPredictions":{2}}}'
@@ -46,12 +46,12 @@ def run(data, request_headers):
                len(result)
     ))
 
-    return {"result": 'success'}
+    return {"result": result.tolist()}
 
 
 if __name__ == "__main__":
     # Test scoring
     init()
-    test_row = '{"data":[[1,2,3,4,5,6,7,8,9,10],[10,9,8,7,6,5,4,3,2,1]]}'
+    test_row = '{"data":[[1,2,3,4,5,6,7,8,9,10,11,12],[12,11,10,9,8,7,6,5,4,3,2,1]]}'
     prediction = run(test_row, {})
     print("Test result: ", prediction)
