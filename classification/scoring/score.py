@@ -37,7 +37,7 @@ output_sample = numpy.array([
 @input_schema('data', NumpyParameterType(input_sample))
 @output_schema(NumpyParameterType(output_sample))
 def run(data, request_headers):
-    # result = model.predict(data)
+    result = 1
 
     print(('{{"RequestId":"{0}", '
            '"TraceParent":"{1}", '
