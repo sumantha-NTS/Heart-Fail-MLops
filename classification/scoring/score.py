@@ -23,11 +23,9 @@ def init():
 
 
 input_sample = numpy.array([
-    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    [10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
-output_sample = numpy.array([
-    5021.509689995557,
-    3693.645386402646])
+    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11, 12],
+    [12, 11, 10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
+output_sample = model.predict(input_sample)
 
 
 # Inference_schema generates a schema for your web service
@@ -37,16 +35,7 @@ output_sample = numpy.array([
 @output_schema(NumpyParameterType(output_sample))
 def run(data, request_headers):
     result = model.predict(data)
-    print(('{{"RequestId":"{0}", '
-           '"TraceParent":"{1}", '
-           '"NumberOfPredictions":{2}}}'
-           ).format(
-               request_headers.get("X-Ms-Request-Id", ""),
-               request_headers.get("Traceparent", ""),
-               len(result)
-    ))
-
-    return {"result": result.tolist()}
+    return result.tolist()
 
 
 if __name__ == "__main__":
