@@ -25,7 +25,9 @@ def init():
 input_sample = numpy.array([
     [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11, 12],
     [12, 11, 10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
-output_sample = model.predict(input_sample)
+output_sample = numpy.array([
+    0,
+    1])
 
 
 # Inference_schema generates a schema for your web service
