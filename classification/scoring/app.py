@@ -19,6 +19,7 @@ def init():
 
     model = joblib.load(model_path)
 
+
 @app.route('/')
 def index():
     return 'Welcome'
