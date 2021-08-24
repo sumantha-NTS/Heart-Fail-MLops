@@ -2,7 +2,6 @@ import numpy
 import joblib
 import os
 from azureml.core.model import Model
-import requests
 # from inference_schema.schema_decorators \
 #     import input_schema, output_schema
 # from inference_schema.parameter_types.numpy_parameter_type \
