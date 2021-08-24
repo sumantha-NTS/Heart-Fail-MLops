@@ -37,7 +37,7 @@ output_sample = numpy.array([
 @output_schema(NumpyParameterType(output_sample))
 def run(data, request_headers):
     result = model.predict(data)
-    return result.tolist()
+    return result
 
 
 if __name__ == "__main__":
