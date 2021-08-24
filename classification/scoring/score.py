@@ -2,10 +2,10 @@ import numpy
 import joblib
 import os
 from azureml.core.model import Model
-from inference_schema.schema_decorators \
-    import input_schema, output_schema
-from inference_schema.parameter_types.numpy_parameter_type \
-    import NumpyParameterType
+# from inference_schema.schema_decorators \
+#     import input_schema, output_schema
+# from inference_schema.parameter_types.numpy_parameter_type \
+#     import NumpyParameterType
 
 
 def init():
@@ -33,11 +33,11 @@ output_sample = numpy.array([
 # Inference_schema generates a schema for your web service
 # It then creates an OpenAPI (Swagger) specification for the web service
 # at http://<scoring_base_url>/swagger.json
-@input_schema('data', NumpyParameterType(input_sample))
-@output_schema(NumpyParameterType(output_sample))
+# @input_schema('data', NumpyParameterType(input_sample))
+# @output_schema(NumpyParameterType(output_sample))
 def run(data, request_headers):
     result = model.predict(data)
-    return 'success'
+    return {"result": result}
 
 
 if __name__ == "__main__":
