@@ -3,9 +3,9 @@
 import os
 import ssl
 import argparse
-# from azureml.core import Workspace
+from azureml.core import Workspace
 # from azureml.core.webservice import AciWebservice
-# from ml_service.util.env_variables import Env
+from ml_service.util.env_variables import Env
 
 
 def allowSelfSignedHttps(allowed):
@@ -36,15 +36,16 @@ def main():
     )
     args = parser.parse_args()
     print('success', args)
+    
+    e = Env()
 
-# e = Env()
+    aml_workspace = Workspace.get(
+        name=e.workspace_name,
+        subscription_id=e.subscription_id,
+        resource_group=e.resource_group
+    )
 
-# aml_workspace = Workspace.get(
-#     name=e.workspace_name,
-#     subscription_id=e.subscription_id,
-#     resource_group=e.resource_group
-# )
-
+    print(aml_workspace)
 # service = AciWebservice(aml_workspace, args.service)
 
 # service_keys = service.get_keys()
