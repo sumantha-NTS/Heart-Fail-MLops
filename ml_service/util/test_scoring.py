@@ -36,7 +36,7 @@ def main():
     )
     args = parser.parse_args()
     print('success', args)
-    
+
     e = Env()
 
     aml_workspace = Workspace.get(
