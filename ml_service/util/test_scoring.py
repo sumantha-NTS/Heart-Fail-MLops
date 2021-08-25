@@ -1,11 +1,11 @@
-import urllib.request
-import json
+# import urllib.request
+# import json
 import os
 import ssl
 import argparse
-from azureml.core import Workspace
-from azureml.core.webservice import AciWebservice
-from ml_service.util.env_variables import Env
+# from azureml.core import Workspace
+# from azureml.core.webservice import AciWebservice
+# from ml_service.util.env_variables import Env
 
 
 def allowSelfSignedHttps(allowed):
@@ -16,73 +16,78 @@ def allowSelfSignedHttps(allowed):
 
 
 allowSelfSignedHttps(True)
+def main():
+    parser = argparse.ArgumentParser("smoke_test_scoring_service.py")
 
-parser = argparse.ArgumentParser("smoke_test_scoring_service.py")
+    parser.add_argument(
+        "--type",
+        type=str,
+        choices=["AKS", "ACI", "Webapp"],
+        required=True,
+        help="type of service"
+    )
+    parser.add_argument(
+        "--service",
+        type=str,
+        required=True,
+        help="Name of the image to test"
+    )
+    args = parser.parse_args()
+    print('success')
 
-parser.add_argument(
-    "--type",
-    type=str,
-    choices=["AKS", "ACI", "Webapp"],
-    required=True,
-    help="type of service"
-)
-parser.add_argument(
-    "--service",
-    type=str,
-    required=True,
-    help="Name of the image to test"
-)
-args = parser.parse_args()
+# e = Env()
 
-e = Env()
+# aml_workspace = Workspace.get(
+#     name=e.workspace_name,
+#     subscription_id=e.subscription_id,
+#     resource_group=e.resource_group
+# )
 
-aml_workspace = Workspace.get(
-    name=e.workspace_name,
-    subscription_id=e.subscription_id,
-    resource_group=e.resource_group
-)
+# service = AciWebservice(aml_workspace, args.service)
 
-service = AciWebservice(aml_workspace, args.service)
+# service_keys = service.get_keys()
 
-service_keys = service.get_keys()
+# # Request data goes here
+# data = {
+#     'age': '30',
+#     'anaemia': '1',
+#     'c': 1,
+#     'd': 1,
+#     'e': 1,
+#     'f': 1,
+#     'g': 1,
+#     'h': 1,
+#     'i': 1,
+#     'j': 1,
+#     'k': 1,
+#     'l': 1
+# }
 
-# Request data goes here
-data = {
-    'age': '30',
-    'anaemia': '1',
-    'c': 1,
-    'd': 1,
-    'e': 1,
-    'f': 1,
-    'g': 1,
-    'h': 1,
-    'i': 1,
-    'j': 1,
-    'k': 1,
-    'l': 1
-}
+# body = str.encode(json.dumps(data))
 
-body = str.encode(json.dumps(data))
+# url = service.scoring_uri
+# print(url)
+# api_key = service_keys[0]  # Replace this with the API key for the web service
+# headers = {
+#     'Content-Type': 'application/json',
+#     'Authorization': ('Bearer ' + api_key)}
 
-url = service.scoring_uri
-print(url)
-api_key = service_keys[0]  # Replace this with the API key for the web service
-headers = {
-    'Content-Type': 'application/json',
-    'Authorization': ('Bearer ' + api_key)}
+# req = urllib.request.Request(url, body, headers)
 
-req = urllib.request.Request(url, body, headers)
+# try:
+#     response = urllib.request.urlopen(req)
 
-try:
-    response = urllib.request.urlopen(req)
+#     result = response.read()
+#     print(result)
+# except urllib.error.HTTPError as error:
+#     print(
+#         "The request failed with status code: "
+#         + str(error.code))
 
-    result = response.read()
-    print(result)
-except urllib.error.HTTPError as error:
-    print(
-        "The request failed with status code: "
-        + str(error.code))
+#     # Print the headers
+#     print(error.info())
+#     print(json.loads(error.read().decode("utf8", 'ignore')))
 
-    # Print the headers
-    print(error.info())
-    print(json.loads(error.read().decode("utf8", 'ignore')))
+
+if __name__=='__main__':
+    main()
