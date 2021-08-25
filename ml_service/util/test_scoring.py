@@ -45,8 +45,6 @@ def main():
         resource_group=e.resource_group
     )
     service = AciWebservice(aml_workspace, args.service)
-    service_keys = service.get_keys()
-    print(service_keys)
 
     # Request data goes here
     data = {
@@ -74,6 +72,11 @@ def main():
 
     url = service.scoring_uri
     print(url)
+
+    if service.auth_enabled:
+        service_keys = service.get_keys()
+        print(service_keys)
+
     api_key = service_keys[0]  # Replace this with the API key
     headers = {
         'Content-Type': 'application/json',
