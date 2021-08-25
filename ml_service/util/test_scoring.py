@@ -35,7 +35,7 @@ def main():
         help="Name of the image to test"
     )
     args = parser.parse_args()
-    print('success',args)
+    print('success', args)
 
 # e = Env()
 
