@@ -50,18 +50,24 @@ def main():
 
     # Request data goes here
     data = {
-        'age': '30',
-        'anaemia': '1',
-        'c': 1,
-        'd': 1,
-        'e': 1,
-        'f': 1,
-        'g': 1,
-        'h': 1,
-        'i': 1,
-        'j': 1,
-        'k': 1,
-        'l': 1
+        'data': [
+            {
+                'age': '30',
+                'anaemia': '1',
+                'c': 1,
+                'd': 1,
+                'e': 1,
+                'f': 1,
+                'g': 1,
+                'h': 1,
+                'i': 1,
+                'j': 1,
+                'k': 1,
+                'l': 1
+            }
+
+        ]
+
     }
 
     body = str.encode(json.dumps(data))
