@@ -2,9 +2,9 @@ import urllib.request
 import json
 import os
 import ssl
-# from azureml.core import Workspace
+from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice
-# from ml_service.util.env_variables import Env
+from ml_service.util.env_variables import Env
 
 
 def allowSelfSignedHttps(allowed):
@@ -18,7 +18,13 @@ allowSelfSignedHttps(True)
 
 ACI_DEPLOYMENT_NAME = 'mlops-aci-test_scoring'
 
-aml_workspace = 'Heart_fail_ML'
+e = Env()
+
+aml_workspace = Workspace.get(
+    name=e.workspace_name,
+    subscription_id=e.subscription_id,
+    resource_group=e.resource_group
+)
 
 service = AciWebservice(aml_workspace, ACI_DEPLOYMENT_NAME)
 
@@ -27,7 +33,17 @@ service_keys = service.get_keys()
 # Request data goes here
 data = {
     'age': '30',
-    'anaemia': 'Yes'
+    'anaemia': '1',
+    'c': 1,
+    'd': 1,
+    'e': 1,
+    'f': 1,
+    'g':1,
+    'h':1,
+    'i':1,
+    'j':1,
+    'k':1,
+    'l':1
 }
 
 body = str.encode(json.dumps(data))
