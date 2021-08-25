@@ -11,13 +11,13 @@ from ml_service.util.env_variables import Env
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') \
-    and getattr(ssl, '_create_unverified_context', None):
+        and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
 
 allowSelfSignedHttps(True)
 
-parser = argparse.ArgumentParser("test_scoring.py")
+parser = argparse.ArgumentParser("test_scoring")
 
 parser.add_argument(
     "--service",
@@ -51,7 +51,7 @@ url = service.scoring_uri
 api_key = service_keys[0]  # Replace this with the API key for the web service
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': ('Bearer '+ api_key)}
+    'Authorization': ('Bearer ' + api_key)}
 
 req = urllib.request.Request(url, body, headers)
 
