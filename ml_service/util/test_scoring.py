@@ -18,13 +18,7 @@ allowSelfSignedHttps(True)
 
 ACI_DEPLOYMENT_NAME = 'mlops-aci-test_scoring'
 
-e = Env()
-
-aml_workspace = Workspace.get(
-    name=e.workspace_name,
-    subscription_id=e.subscription_id,
-    resource_group=e.resource_group
-)
+aml_workspace = 'Heart_fail_ML'
 
 service = AciWebservice(aml_workspace, ACI_DEPLOYMENT_NAME)
 
