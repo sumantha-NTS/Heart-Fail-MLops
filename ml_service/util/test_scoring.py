@@ -10,21 +10,15 @@ from ml_service.util.env_variables import Env
 
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
-    if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
+    if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') \
+    and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
 
-allowSelfSignedHttps(True)  # this line is needed if you use self-signed certificate in your scoring service.
+allowSelfSignedHttps(True)
 
 parser = argparse.ArgumentParser("test_scoring.py")
 
-parser.add_argument(
-    "--type",
-    type=str,
-    choices=["AKS", "ACI", "Webapp"],
-    required=True,
-    help="type of service"
-)
 parser.add_argument(
     "--service",
     type=str,
@@ -47,17 +41,17 @@ service_keys = service.get_keys()
 
 # Request data goes here
 data = {
-    'age':'30',
-    'anaemia':'Yes'
+    'age': '30',
+    'anaemia': 'Yes'
 }
 
 body = str.encode(json.dumps(data))
 
-url = 'http://cef2dcc6-dd7d-4aad-9592-1af3241a6aad.centralus.azurecontainer.io/score'
+url = service.scoring_uri
 api_key = service_keys[0]  # Replace this with the API key for the web service
 headers = {
-    'Content-Type':'application/json',
-    'Authorization':('Bearer '+ api_key)}
+    'Content-Type': 'application/json',
+    'Authorization': ('Bearer '+ api_key)}
 
 req = urllib.request.Request(url, body, headers)
 
@@ -71,6 +65,6 @@ except urllib.error.HTTPError as error:
         "The request failed with status code: "
         + str(error.code))
 
-    # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+    # Print the headers
     print(error.info())
     print(json.loads(error.read().decode("utf8", 'ignore')))
