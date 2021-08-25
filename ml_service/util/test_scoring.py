@@ -2,9 +2,9 @@ import urllib.request
 import json
 import os
 import ssl
-from azureml.core import Workspace
+# from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice
-from ml_service.util.env_variables import Env
+# from ml_service.util.env_variables import Env
 
 
 def allowSelfSignedHttps(allowed):
