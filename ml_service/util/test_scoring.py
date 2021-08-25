@@ -2,6 +2,7 @@ import urllib.request
 import json
 import os
 import ssl
+import argparse
 from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice
 from ml_service.util.env_variables import Env
@@ -16,7 +17,22 @@ def allowSelfSignedHttps(allowed):
 
 allowSelfSignedHttps(True)
 
-ACI_DEPLOYMENT_NAME = 'mlops-aci-test_scoring'
+parser = argparse.ArgumentParser("smoke_test_scoring_service.py")
+
+parser.add_argument(
+    "--type",
+    type=str,
+    choices=["AKS", "ACI", "Webapp"],
+    required=True,
+    help="type of service"
+)
+parser.add_argument(
+    "--service",
+    type=str,
+    required=True,
+    help="Name of the image to test"
+)
+args = parser.parse_args()
 
 e = Env()
 
@@ -26,7 +42,7 @@ aml_workspace = Workspace.get(
     resource_group=e.resource_group
 )
 
-service = AciWebservice(aml_workspace, ACI_DEPLOYMENT_NAME)
+service = AciWebservice(aml_workspace, args.service)
 
 service_keys = service.get_keys()
 
@@ -38,17 +54,18 @@ data = {
     'd': 1,
     'e': 1,
     'f': 1,
-    'g':1,
-    'h':1,
-    'i':1,
-    'j':1,
-    'k':1,
-    'l':1
+    'g': 1,
+    'h': 1,
+    'i': 1,
+    'j': 1,
+    'k': 1,
+    'l': 1
 }
 
 body = str.encode(json.dumps(data))
 
 url = service.scoring_uri
+print(url)
 api_key = service_keys[0]  # Replace this with the API key for the web service
 headers = {
     'Content-Type': 'application/json',
