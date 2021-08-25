@@ -16,6 +16,8 @@ def allowSelfSignedHttps(allowed):
 
 
 allowSelfSignedHttps(True)
+
+
 def main():
     parser = argparse.ArgumentParser("smoke_test_scoring_service.py")
 
@@ -33,7 +35,7 @@ def main():
         help="Name of the image to test"
     )
     args = parser.parse_args()
-    print('success')
+    print('success',args)
 
 # e = Env()
 
@@ -67,7 +69,7 @@ def main():
 
 # url = service.scoring_uri
 # print(url)
-# api_key = service_keys[0]  # Replace this with the API key for the web service
+# api_key = service_keys[0]  # Replace this with the API key
 # headers = {
 #     'Content-Type': 'application/json',
 #     'Authorization': ('Bearer ' + api_key)}
@@ -89,5 +91,5 @@ def main():
 #     print(json.loads(error.read().decode("utf8", 'ignore')))
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
