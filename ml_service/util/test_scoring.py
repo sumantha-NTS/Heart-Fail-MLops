@@ -40,14 +40,10 @@ service = AciWebservice(aml_workspace, args.service)
 service_keys = service.get_keys()
 
 # Request data goes here
-data = {"data":
-         [
-           {
-             "age": "17",
-             "aneamia": '1'
-           }
-       ]
-    }
+data = {
+    'age': '30',
+    'anaemia': 'Yes'
+}
 
 body = str.encode(json.dumps(data))
 
