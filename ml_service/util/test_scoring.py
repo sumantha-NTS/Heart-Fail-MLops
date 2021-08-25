@@ -2,7 +2,6 @@ import urllib.request
 import json
 import os
 import ssl
-import argparse
 from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice
 from ml_service.util.env_variables import Env
@@ -17,15 +16,7 @@ def allowSelfSignedHttps(allowed):
 
 allowSelfSignedHttps(True)
 
-parser = argparse.ArgumentParser("test_scoring")
-
-parser.add_argument(
-    "--service",
-    type=str,
-    required=True,
-    help="Name of the image to test"
-)
-args = parser.parse_args()
+ACI_DEPLOYMENT_NAME = 'mlops-aci-test_scoring'
 
 e = Env()
 
@@ -35,7 +26,7 @@ aml_workspace = Workspace.get(
     resource_group=e.resource_group
 )
 
-service = AciWebservice(aml_workspace, args.service)
+service = AciWebservice(aml_workspace, ACI_DEPLOYMENT_NAME)
 
 service_keys = service.get_keys()
 
