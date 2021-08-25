@@ -24,11 +24,8 @@ def init():
 
 
 input_sample = numpy.array([
-    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    [10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]])
-output_sample = numpy.array([
-    0,
-    1])
+    [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11, 12]])
+output_sample = numpy.array([0])
 
 
 # Inference_schema generates a schema for your web service
@@ -36,24 +33,11 @@ output_sample = numpy.array([
 # at http://<scoring_base_url>/swagger.json
 @input_schema('data', NumpyParameterType(input_sample))
 @output_schema(NumpyParameterType(output_sample))
-def run(data, request_headers):
-    result = 1
-
-    print(('{{"RequestId":"{0}", '
-           '"TraceParent":"{1}", '
-           '"NumberOfPredictions":{2}}}'
-           ).format(
-               request_headers.get("X-Ms-Request-Id", ""),
-               request_headers.get("Traceparent", ""),
-               len(result)
-    ))
-
-    return {"result": 'success'}
-
-
-if __name__ == "__main__":
-    # Test scoring
-    init()
-    test_row = '{"data":[[1,2,3,4,5,6,7,8,9,10],[10,9,8,7,6,5,4,3,2,1]]}'
-    prediction = run(test_row, {})
-    print("Test result: ", prediction)
+def run(data):
+    try:
+        result = model.predict(data)
+        # you can return any datatype as long as it is JSON-serializable
+        return result.tolist()
+    except Exception as e:
+        error = str(e)
+        return error
