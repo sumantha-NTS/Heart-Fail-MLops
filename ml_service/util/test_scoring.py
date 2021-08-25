@@ -1,10 +1,10 @@
-# import urllib.request
-# import json
+import urllib.request
+import json
 import os
 import ssl
 import argparse
 from azureml.core import Workspace
-# from azureml.core.webservice import AciWebservice
+from azureml.core.webservice import AciWebservice
 from ml_service.util.env_variables import Env
 
 
@@ -44,52 +44,50 @@ def main():
         subscription_id=e.subscription_id,
         resource_group=e.resource_group
     )
+    service = AciWebservice(aml_workspace, args.service)
+    service_keys = service.get_keys()
+    print(service_keys)
 
-    print(aml_workspace)
-# service = AciWebservice(aml_workspace, args.service)
+    # Request data goes here
+    data = {
+        'age': '30',
+        'anaemia': '1',
+        'c': 1,
+        'd': 1,
+        'e': 1,
+        'f': 1,
+        'g': 1,
+        'h': 1,
+        'i': 1,
+        'j': 1,
+        'k': 1,
+        'l': 1
+    }
 
-# service_keys = service.get_keys()
+    body = str.encode(json.dumps(data))
 
-# # Request data goes here
-# data = {
-#     'age': '30',
-#     'anaemia': '1',
-#     'c': 1,
-#     'd': 1,
-#     'e': 1,
-#     'f': 1,
-#     'g': 1,
-#     'h': 1,
-#     'i': 1,
-#     'j': 1,
-#     'k': 1,
-#     'l': 1
-# }
+    url = service.scoring_uri
+    print(url)
+    api_key = service_keys[0]  # Replace this with the API key
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': ('Bearer ' + api_key)}
 
-# body = str.encode(json.dumps(data))
+    req = urllib.request.Request(url, body, headers)
 
-# url = service.scoring_uri
-# print(url)
-# api_key = service_keys[0]  # Replace this with the API key
-# headers = {
-#     'Content-Type': 'application/json',
-#     'Authorization': ('Bearer ' + api_key)}
+    try:
+        response = urllib.request.urlopen(req)
 
-# req = urllib.request.Request(url, body, headers)
+        result = response.read()
+        print(result)
+    except urllib.error.HTTPError as error:
+        print(
+            "The request failed with status code: "
+            + str(error.code))
 
-# try:
-#     response = urllib.request.urlopen(req)
-
-#     result = response.read()
-#     print(result)
-# except urllib.error.HTTPError as error:
-#     print(
-#         "The request failed with status code: "
-#         + str(error.code))
-
-#     # Print the headers
-#     print(error.info())
-#     print(json.loads(error.read().decode("utf8", 'ignore')))
+        # Print the headers
+        print(error.info())
+        print(json.loads(error.read().decode("utf8", 'ignore')))
 
 
 if __name__ == '__main__':
