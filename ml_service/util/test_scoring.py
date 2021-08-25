@@ -11,7 +11,7 @@ from ml_service.util.env_variables import Env
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') \
-        and getattr(ssl, '_create_unverified_context', None):
+            and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
 
