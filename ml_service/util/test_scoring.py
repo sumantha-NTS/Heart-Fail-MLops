@@ -82,6 +82,7 @@ def main():
         'Authorization': ('Bearer ' + api_key)}
 
     req = urllib.request.Request(url, body, headers)
+    print(req)
 
     try:
         response = urllib.request.urlopen(req)
