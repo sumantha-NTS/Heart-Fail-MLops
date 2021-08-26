@@ -10,7 +10,7 @@ key = 'hXUbDlRKUzMh3e5RWLqEwKlQk2Y921WJ'
 # Two sets of data to score, so we get two results back
 data = {"data":
         [
-            [20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            [0.636, 0, 0.071, 0, 0.09, 1, 0.29, 0.157, 0.4857, 1, 0, 0]
         ]
         }
 # Convert to JSON string
@@ -23,4 +23,5 @@ headers['Authorization'] = f'Bearer {key}'
 
 # Make the request and display the response
 resp = requests.post(scoring_uri, input_data, headers=headers)
+print(resp)
 print(resp.text)
