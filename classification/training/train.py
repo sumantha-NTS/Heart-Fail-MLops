@@ -1,5 +1,6 @@
 # importing necessary libraries
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -46,6 +47,7 @@ def main():
 
     # Scale the input data
     scaled_data = scaling_func(df)
+    print(scaled_data.iloc[0])
 
     # splitting the data
     data = split_data(scaled_data)
@@ -59,6 +61,10 @@ def main():
     # getting the metrics of the model
     metrics = get_metrics(model, data)
     print(metrics)
+
+    # testing the results
+    test_data = np.array([0.636,0,0.071,0,0.09,1, 0.29, 0.157, 0.4857, 1, 0, 0])
+    print(model.predict([test_data]))
 
 
 if __name__ == '__main__':
