@@ -10,7 +10,7 @@ key = 'hXUbDlRKUzMh3e5RWLqEwKlQk2Y921WJ'
 # Two sets of data to score, so we get two results back
 data = {"data":
         [
-            20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+            [20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
         }
 # Convert to JSON string
