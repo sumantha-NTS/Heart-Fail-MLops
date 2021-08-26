@@ -15,8 +15,6 @@ def allowSelfSignedHttps(allowed):
         ssl._create_default_https_context = ssl._create_unverified_context
 
 
-
-
 def main():
     allowSelfSignedHttps(True)
     parser = argparse.ArgumentParser("smoke_test_scoring_service.py")
