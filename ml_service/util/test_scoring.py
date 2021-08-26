@@ -73,9 +73,8 @@ def main():
     url = service.scoring_uri
     print(url)
 
-    if service.auth_enabled:
-        service_keys = service.get_keys()
-        print(service_keys)
+    service_keys = service.get_keys()
+    print(service_keys)
 
     api_key = service_keys[0]  # Replace this with the API key
     headers = {
