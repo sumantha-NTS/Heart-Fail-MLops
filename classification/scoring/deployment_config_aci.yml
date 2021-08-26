@@ -1,5 +1,5 @@
 computeType: ACI
 containerResourceRequirements:
   cpu: 1
-  memoryInGB: 4
-authEnabled: true
+  memoryInGB: 1
+authEnabled: false

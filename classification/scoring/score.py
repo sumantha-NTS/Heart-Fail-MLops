@@ -38,6 +38,7 @@ def run(data):
         result = model.predict(data)
         # you can return any datatype as long as it is JSON-serializable
         return {"result": result.tolist()}
+        # return {'Input data: ', data}
     except Exception as e:
         error = str(e)
         return error
