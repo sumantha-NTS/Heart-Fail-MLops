@@ -48,25 +48,8 @@ def main():
 
     # Request data goes here
     data = {
-        'data': [
-            {
-                'age': '30',
-                'anaemia': '1',
-                'c': 1,
-                'd': 1,
-                'e': 1,
-                'f': 1,
-                'g': 1,
-                'h': 1,
-                'i': 1,
-                'j': 1,
-                'k': 1,
-                'l': 1
-            }
-
-        ]
-
-    }
+        'data': [20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }
 
     body = str.encode(json.dumps(data))
 
@@ -82,7 +65,6 @@ def main():
         'Authorization': ('Bearer ' + api_key)}
 
     req = urllib.request.Request(url, body, headers)
-    print(req)
 
     try:
         response = urllib.request.urlopen(req)
