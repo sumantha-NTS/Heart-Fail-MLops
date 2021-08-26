@@ -63,7 +63,8 @@ def main():
     print(metrics)
 
     # testing the results
-    test_data = np.array([0.636,0,0.071,0,0.09,1, 0.29, 0.157, 0.4857, 1, 0, 0])
+    test_data = np.array(
+        [0.636, 0, 0.071, 0, 0.09, 1, 0.29, 0.157, 0.4857, 1, 0, 0])
     print(model.predict([test_data]))
 
 

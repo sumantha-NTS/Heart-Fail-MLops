@@ -12,7 +12,7 @@ data = {"data":
         [
             20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
         ]
-}
+    }
 # Convert to JSON string
 input_data = json.dumps(data)
 
