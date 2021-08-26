@@ -87,7 +87,7 @@ def main():
     #             % file_name
     #         )
 
-    # Get dataset name
+    # Get dataset name and register in ML workspace
     dataset_name = e.dataset_name
     dataset = dataset.register(
         workspace=aml_workspace,
