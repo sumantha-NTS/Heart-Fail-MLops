@@ -88,7 +88,7 @@ def main():
         except Exception as a:
             a = 'Dataset not found'
             print(a)
-            sys.exit(0)
+            raise
 
     # updating the datastore to run config
     run_config.environment.environment_variables[
