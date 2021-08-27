@@ -4,6 +4,7 @@ from azureml.core.runconfig import RunConfiguration
 from azureml.pipeline.core.graph import PipelineParameter
 from azureml.pipeline.steps import PythonScriptStep
 import os
+import sys
 
 from ml_service.util.env_variables import Env
 from ml_service.util.attach_compute import get_compute
@@ -87,6 +88,7 @@ def main():
         except Exception as a:
             a = 'Dataset not found'
             print(a)
+            sys.exit(0)
 
     # updating the datastore to run config
     run_config.environment.environment_variables[
