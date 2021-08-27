@@ -80,9 +80,9 @@ def main():
     else:
         try:
             Dataset.get_by_name(
-                workspace = aml_workspace,
-                name = dataset_name,
-                version = e.dataset_version)
+                workspace=aml_workspace,
+                name=dataset_name,
+                version=e.dataset_version)
             print('Dataset exists')
         except Exception as e:
             print(e)
@@ -108,7 +108,6 @@ def main():
     caller_run_id_param = PipelineParameter(
         name="caller_run_id",
         default_value="none")
-
 
     # Create a PipelineData to pass data between steps
     pipeline_data = PipelineData(
