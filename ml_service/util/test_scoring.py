@@ -59,7 +59,7 @@ def main():
     service_keys = service.get_keys()
     print(service_keys)
 
-    api_key = service_keys[0]  # Replace this with the API key
+    api_key = 'amjamu42mltuyzjivw3rr8fbeyrr34spjrfvhb04'  # Replace this with the API key
     headers = {
         'Content-Type': 'application/json',
         'Authorization': ('Bearer ' + api_key)
