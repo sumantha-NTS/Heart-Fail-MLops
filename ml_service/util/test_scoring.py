@@ -48,12 +48,8 @@ def main():
 
     # Request data goes here
     data = {
-            'data': [{
-                'age': 10,
-                'anaemia': 1,
-                'c': 1
-            }]
-            }
+        'data': [[0.636, 0, 0.071, 0, 0.09, 1, 0.29, 0.157, 0.4857, 1, 0, 0]]
+        }
 
     body = str.encode(json.dumps(data))
 

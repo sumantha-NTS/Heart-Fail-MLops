@@ -35,8 +35,7 @@ output_sample = numpy.array([0])
 @output_schema(NumpyParameterType(output_sample))
 def run(data):
     try:
-        print(data)
-        result = model.predict([[0.636, 0, 0.071, 0, 0.09, 1, 0.29, 0.157, 0.4857, 1, 0, 0]])
+        result = model.predict(data)
         # you can return any datatype as long as it is JSON-serializable
         return {"result": result.tolist()}
     except Exception as e:
