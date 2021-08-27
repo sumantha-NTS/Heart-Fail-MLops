@@ -84,8 +84,8 @@ def main():
                 name=dataset_name,
                 version=e.dataset_version)
             print('Dataset exists')
-        except Exception as e:
-            print(e)
+        except:
+            raise Exception('Dataset not found')
 
     # updating the datastore to run config
     run_config.environment.environment_variables[
