@@ -50,6 +50,7 @@ class Env:
     dataset_version: Optional[str] = os.environ.get("DATASET_VERSION")
     run_evaluation: Optional[str] = os.environ.get("RUN_EVALUATION", "true")
     csv_file_name: Optional[str] = os.environ.get("CSV_FILE_NAME")
+    upload_flag: Optional[str] = os.environ.get("UPLOAD_FLAG")
     allow_run_cancel: Optional[str] = os.environ.get(
         "ALLOW_RUN_CANCEL", "true"
     )  # NOQA: E501

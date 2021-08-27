@@ -8,7 +8,6 @@ import os
 from ml_service.util.env_variables import Env
 from ml_service.util.attach_compute import get_compute
 from ml_service.util.manage_environment import get_environment
-# from ml_service.util.load_data import upload_from_local
 
 
 def main():
@@ -49,6 +48,45 @@ def main():
         datastore_name = aml_workspace.get_default_datastore().name
     print('Datastore_Name: ', datastore_name)
 
+    # Get dataset name
+    dataset_name = e.dataset_name
+
+    # check upload flag
+    if e.upload_flag == 'true':
+        # finding the dataset in the datastore
+        datatstore = Datastore.get(aml_workspace, datastore_name)
+        file_name = e.csv_file_name
+        target_path = "training_data/"
+        path_on_datastore = os.path.join(target_path, file_name)
+        print('Datastore: ', datatstore)
+        dataset = Dataset.Tabular.from_delimited_files(
+                path=(datatstore, path_on_datastore))
+        # if (dataset.name):
+        #     print(f'{dataset.name} dataset found')
+        # else:
+        #     raise Exception(
+        #             'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
+        #             % file_name
+        #         )
+
+        # register in ML workspace
+        dataset = dataset.register(
+            workspace=aml_workspace,
+            name=dataset_name,
+            description="Heart Fail Prediction training data",
+            tags={"format": "CSV"},
+            create_new_version=True,
+        )
+    else:
+        try:
+            Dataset.get_by_name(
+                workspace = aml_workspace,
+                name = dataset_name,
+                version = e.dataset_version)
+            print('Dataset exists')
+        except Exception as e:
+            print(e)
+
     # updating the datastore to run config
     run_config.environment.environment_variables[
         "DATASTORE_NAME"
@@ -71,31 +109,7 @@ def main():
         name="caller_run_id",
         default_value="none")
 
-    # finding the dataset in the datastore
-    datatstore = Datastore.get(aml_workspace, datastore_name)
-    file_name = e.csv_file_name
-    target_path = "training_data/"
-    path_on_datastore = os.path.join(target_path, file_name)
-    print('Datastore: ', datatstore)
-    dataset = Dataset.Tabular.from_delimited_files(
-            path=(datatstore, path_on_datastore))
-    # if (dataset.name):
-    #     print(f'{dataset.name} dataset found')
-    # else:
-    #     raise Exception(
-    #             'Could not find CSV dataset at "%s". If you have bootstrapped your project, you will need to provide a CSV.'  # NOQA: E501
-    #             % file_name
-    #         )
 
-    # Get dataset name and register in ML workspace
-    dataset_name = e.dataset_name
-    dataset = dataset.register(
-        workspace=aml_workspace,
-        name=dataset_name,
-        description="Heart Fail Prediction training data",
-        tags={"format": "CSV"},
-        create_new_version=True,
-    )
     # Create a PipelineData to pass data between steps
     pipeline_data = PipelineData(
         "pipeline_data", datastore=aml_workspace.get_default_datastore()

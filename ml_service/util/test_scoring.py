@@ -56,13 +56,13 @@ def main():
     url = service.scoring_uri
     print(url)
 
-    # service_keys = service.get_keys()
-    # print(service_keys)
+    service_keys = service.get_keys()
+    print(service_keys)
 
-    # api_key = service_keys[0]  # Replace this with the API key
+    api_key = service_keys[0]  # Replace this with the API key
     headers = {
         'Content-Type': 'application/json',
-        # 'Authorization': ('Bearer ' + api_key)
+        'Authorization': ('Bearer ' + api_key)
     }
 
     req = urllib.request.Request(url, body, headers)
