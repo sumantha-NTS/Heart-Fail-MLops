@@ -48,8 +48,12 @@ def main():
 
     # Request data goes here
     data = {
-        'data': [[0.636, 0, 0.071, 0, 0.09, 1, 0.29, 0.157, 0.4857, 1, 0, 0]]
-        }
+            'data': [{
+                'age': 10,
+                'anaemia': 1,
+                'c': 1
+            }]
+            }
 
     body = str.encode(json.dumps(data))
 
@@ -59,8 +63,7 @@ def main():
     service_keys = service.get_keys()
     print(service_keys)
 
-    api_key = 'amjamu42mltuyzjivw3rr8fbey' \
-        'rr34spjrfvhb04'  # Replace this with the API key
+    api_key = service_keys[0]  # Replace this with the API key
     headers = {
         'Content-Type': 'application/json',
         'Authorization': ('Bearer ' + api_key)
